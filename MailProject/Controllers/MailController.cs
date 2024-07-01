@@ -61,7 +61,7 @@ namespace MailProject.Controllers
 
         [HttpGet]
 
-        public IActionResult SendMail()
+        public IActionResult SendMail(string selectedUserId = null)
         {
             List<SelectListItem> values = (from x in _mailContext.AppUsers.ToList()
                                            select new SelectListItem
@@ -71,7 +71,12 @@ namespace MailProject.Controllers
 
                                            }).ToList();
             ViewBag.users = values;
+            
             var model = new CreateMailViewModel();
+            if (selectedUserId != null)
+            {
+                model.ReceiverUserId = Convert.ToInt32(selectedUserId);
+            }
             return View(model);
         }
 

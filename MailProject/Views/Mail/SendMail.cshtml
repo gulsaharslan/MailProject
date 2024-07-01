@@ -51,4 +51,12 @@
         $("#isDraft").val(true);
         $('form').submit();
     });
+
+    $(document).ready(function () {
+        // Get the selectedUserId from the model
+        var selectedUserId = '@Model.ReceiverUserId';
+
+        // Set the selected option in the dropdown list
+        $('#ReceiverUserId').val(selectedUserId);
+    });
 </script>
