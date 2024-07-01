@@ -1,0 +1,108 @@
+﻿@model LoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mail Project | Giriş Yap</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/template/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/template/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/template/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        .login-page,
+        .register-page {
+            background-image: url("https://images.unsplash.com/photo-1615715757401-f30e7b27b912?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHdoaXRlJTIwJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D://png.pngtree.com/thumb_back/fh260/background/20231031/pngtree-iridescent-beauty-textured-background-in-light-blue-abstract-art-image_13719591.png") !important;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#"><b>Mail</b>Project</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Merhaba, Giriş Yapın</p>
+
+                <form action="/Login/Index/" method="post">
+                    <span class="text-danger" asp-validation-for="@Model.UserName"></span>
+                    <div class="input-group mb-3">
+                   
+                      
+                        <input type="text" asp-for="@Model.UserName" class="form-control" placeholder="Kullanıcı Adı" name="UserName">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="text-danger" asp-validation-for="@Model.Password"></span>
+                    <div class="input-group mb-3">
+                      
+                       
+                        <input type="password" asp-for="@Model.Password" class="form-control" placeholder="Şifre">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Beni Hatırla
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-info btn-block btn-flat">Giriş Yap</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+                
+                <!-- /.social-auth-links -->
+
+                <p class="mb-1">
+                    <a href="#">Şifremi unuttum</a>
+                </p>
+                <p class="mb-0">
+                    <a href="/Register/Index/" class="text-center">Yeni Üye Kaydı</a>
+                </p>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/template/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/template/dist/js/adminlte.min.js"></script>
+
+</body>
+</html>
+

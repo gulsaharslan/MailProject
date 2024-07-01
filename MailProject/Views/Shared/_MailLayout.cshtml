@@ -1,0 +1,205 @@
+﻿
+@{
+    ViewData["Title"] = "_MailLayout";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Mailbox</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/template/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/template//plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/template//dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        .content-wrapper, .main-header, .main-footer{
+            margin-left:0px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                
+                <li class="nav-item d-none d-sm-inline-block">
+                    <img src="https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg"  class="rounded-circle" style="width:50px; height:50px"  />
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Gülşah Arslan Onur</a>
+                </li>
+            </ul>
+
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Mail Project</h1>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-2 ml-5">
+                        <a href="/Mail/SendMail/" class="btn btn-primary btn-block mb-3">Oluştur</a>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Klasörler</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item active">
+                                        <a href="/Mail/Inbox/" class="nav-link">
+                                            <i class="fas fa-inbox"></i> Gelen Kutusu
+                                            <span class="badge bg-primary float-right">@ViewBag.totalMail</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Mail/Sendbox/" class="nav-link">
+                                            <i class="far fa-envelope"></i> Giden Kutusu
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Mail/DraftMail/" class="nav-link">
+                                            <i class="far fa-file-alt"></i> Taslaklar
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item">
+                                        <a href="/Mail/Trash/" class="nav-link">
+                                            <i class="far fa-trash-alt"></i> Çöp Kutusu
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Etiketler</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-circle text-info"></i>
+                                            Okunanlar
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-circle text-warning"></i> Favoriler
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <div class="col-md-9">
+                        @RenderBody()
+                    </div>
+                </div>
+                <!-- /.row -->
+            </section>
+              
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.0.0-rc.3
+            </div>
+            <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+            reserved.
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/template//plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/template//plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/template//dist/js/adminlte.min.js"></script>
+    <!-- Page Script -->
+    <script>
+        $(function () {
+            //Enable check and uncheck all functionality
+            $('.checkbox-toggle').click(function () {
+                var clicks = $(this).data('clicks')
+                if (clicks) {
+                    //Uncheck all checkboxes
+                    $('.mailbox-messages input[type=\'checkbox\']').prop('checked', false)
+                    $('.checkbox-toggle .far.fa-check-square').removeClass('fa-check-square').addClass('fa-square')
+                } else {
+                    //Check all checkboxes
+                    $('.mailbox-messages input[type=\'checkbox\']').prop('checked', true)
+                    $('.checkbox-toggle .far.fa-square').removeClass('fa-square').addClass('fa-check-square')
+                }
+                $(this).data('clicks', !clicks)
+            })
+
+            //Handle starring for glyphicon and font awesome
+            $('.mailbox-star').click(function (e) {
+                e.preventDefault()
+                //detect type
+                var $this = $(this).find('a > i')
+                var glyph = $this.hasClass('glyphicon')
+                var fa = $this.hasClass('fa')
+
+                //Switch states
+                if (glyph) {
+                    $this.toggleClass('glyphicon-star')
+                    $this.toggleClass('glyphicon-star-empty')
+                }
+
+                if (fa) {
+                    $this.toggleClass('fa-star')
+                    $this.toggleClass('fa-star-o')
+                }
+            })
+        })
+    </script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+</body>
+</html>

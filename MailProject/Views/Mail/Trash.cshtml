@@ -1,0 +1,128 @@
+﻿@model List<EntityLayer.Concrete.Messages>
+
+
+@{
+    ViewData["Title"] = "Trash";
+    Layout = "~/Views/Shared/_MailLayout.cshtml";
+}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Çöp Kutusu</h3>
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+        <div class="mailbox-controls">
+            <!-- Check all button -->
+            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                <i class="far fa-square"></i>
+            </button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm deleteMail"><i class="far fa-trash-alt"></i></button>
+            </div>
+            <!-- /.btn-group -->
+            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
+            <div class="float-right">
+                1-50/200
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <!-- /.btn-group -->
+            </div>
+            <!-- /.float-right -->
+        </div>
+        <div class="table-responsive mailbox-messages">
+            <table class="table table-hover table-striped">
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td hidden>@item.AppUserId</td>
+                            <td>
+                                <input type="checkbox" name="messageCheckbox" value="@item.MessageId">
+                                 
+                            </td>
+                            <td class="mailbox-name">@item.ReceiverUser.Name @item.ReceiverUser.Surname</td>
+                            <td class="mailbox-subject">
+                                <b>@item.Subject</b>
+                            </td>
+                            <td class="mailbox-date">@item.SentAt.ToShortDateString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <!-- /.table -->
+        </div>
+        <!-- /.mail-box-messages -->
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer p-0">
+        <div class="mailbox-controls">
+            <!-- Check all button -->
+            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                <i class="far fa-square"></i>
+            </button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm deleteMail"><i class="far fa-trash-alt"></i></button>
+            </div>
+            <!-- /.btn-group -->
+            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
+            <div class="float-right">
+                1-50/200
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <!-- /.btn-group -->
+            </div>
+            <!-- /.float-right -->
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".deleteMail").click(function () {
+        var messageIds = [];
+        $("input[name='messageCheckbox']:checked").each(function () {
+            messageIds.push($(this).val());
+        });
+
+        $.ajax({
+            url: '@Url.Action("DeleteMail", "Mail")',
+            type: 'POST',
+            traditional: true,
+            data: { messageIds: messageIds },
+            success: function (data) {
+                Swal.fire({
+                    title: "Mesajları silmek istediğinizden emin misiniz?",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Evet,sil!",
+                    cancelButtonText:"İptal"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Silindi",
+                            icon: "success"
+                        });
+                        location.reload();
+                    }
+                });
+            },
+            error: function (xhr, status, error) {
+
+                console.error("Error deleting messages: " + error);
+            }
+        });
+    });
+
+
+</script>

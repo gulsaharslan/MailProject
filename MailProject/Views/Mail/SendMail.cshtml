@@ -1,0 +1,54 @@
+﻿@model CreateMailViewModel
+
+@{
+    ViewData["Title"] = "SendMail";
+    Layout = "~/Views/Shared/_MailLayout.cshtml";
+}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<div class="col-md-9">
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <h3 class="card-title">Yeni Mail Oluştur</h3>
+        </div>
+        <!-- /.card-header -->
+        <form method="post" action="/Mail/SendMail/">
+        <div class="card-body">
+            <div class="form-group">
+                    <div class="form-group">
+                        @Html.DropDownListFor(x => x.ReceiverUserId, (List<SelectListItem>)ViewBag.users,"Kime göndereceğinizi seçiniz", new { @class = "form-control" })
+                    </div>
+
+            </div>
+            <div class="form-group">
+                    <input id="isDraft" hidden class="form-control" value="false"  name="IsDraft">
+
+                <input class="form-control" placeholder="Konu:" asp-for="Subject">
+            </div>
+            <div class="form-group">
+                <textarea id="compose-textarea" class="form-control" style="height: 300px" asp-for="Body">
+                    </textarea>
+            </div>
+            
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <div class="float-right">
+                <button id="draft" type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Taslak</button>
+                <button id="send" type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Gönder</button>
+            </div>
+            <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Sil</button>
+        </div>
+        </form>
+        <!-- /.card-footer -->
+    </div>
+    <!-- /.card -->
+</div>
+
+<script>
+    $("#draft").click(function (event) {
+        event.preventDefault();
+        $("#isDraft").val(true);
+        $('form').submit();
+    });
+</script>

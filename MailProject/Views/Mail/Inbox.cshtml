@@ -1,0 +1,131 @@
+﻿@model List<EntityLayer.Concrete.Messages>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MailLayout.cshtml";
+}
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Gelen Kutusu</h3>
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+        <div class="mailbox-controls">
+            <!-- Check all button -->
+            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                <i class="far fa-square"></i>
+            </button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm deleteBtn"><i class="far fa-trash-alt"></i></button>
+            </div>
+            <!-- /.btn-group -->
+            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
+            <div class="float-right">
+                1-50/200
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <!-- /.btn-group -->
+            </div>
+            <!-- /.float-right -->
+        </div>
+        <div class="table-responsive mailbox-messages">
+            <table class="table table-hover table-striped">
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td hidden>@item.AppUserId</td>
+                            <td>
+                                <input type="checkbox" name="messageCheckbox" value="@item.MessageId">
+                            </td>
+                            <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
+                            <td class="mailbox-name"><a href="@Url.Action("ReadMail", "Mail", new { id = item.MessageId })">@item.SenderUser.Name @item.SenderUser.Surname</a></td>
+                            <td class="mailbox-subject">
+                                <b>@item.Subject</b> - @if (item.Body.Length > 40)
+                                {
+                                    @item.Body.Substring(0, 40)
+                                }
+                                else
+                                {
+                                    @item.Body
+                                }
+                            </td>
+                            <td class="mailbox-attachment"></td>
+                            <td class="mailbox-date">@item.SentAt.ToShortDateString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <!-- /.table -->
+        </div>
+        <!-- /.mail-box-messages -->
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer p-0">
+        <div class="mailbox-controls">
+            <!-- Check all button -->
+            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                <i class="far fa-square"></i>
+            </button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm deleteBtn"><i class="far fa-trash-alt"></i></button>
+            </div>
+            <!-- /.btn-group -->
+            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
+            <div class="float-right">
+                1-50/200
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <!-- /.btn-group -->
+            </div>
+            <!-- /.float-right -->
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".deleteBtn").click(function () {
+        var messageIds = [];
+        $("input[name='messageCheckbox']:checked").each(function () {
+            messageIds.push($(this).val());
+        });
+
+        $.ajax({
+            url: '@Url.Action("SendTrash", "Mail")',
+            type: 'POST',
+            traditional: true,
+            data: { messageIds: messageIds },
+            success: function (data) {
+                Swal.fire({
+                    text: "Mesajlar çöp kutusuna gönderildi.",
+                    icon: "success",
+                    showCancelButton: false,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "Tamam"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+                setTimeout(function () {
+                    location.reload();
+                },3000)
+            },
+            error: function (xhr, status, error) {
+            
+                console.error("Error deleting messages: " + error);
+            }
+        });
+    });
+
+
+</script>
